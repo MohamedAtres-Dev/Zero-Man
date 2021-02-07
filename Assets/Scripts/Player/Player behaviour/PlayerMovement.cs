@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -16,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     #region General Variables
     private const int LANE_LENGTH = 3;
-    public LanePosition currentLane;
+    [NonSerialized] public LanePosition currentLane;
     private Vector3 direction;
+    private int runHash = Animator.StringToHash("AnimationPar");
     #endregion
 
 
@@ -25,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     #region Movement Variables
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpSpeed = 20f;
+    [SerializeField] private float gravity = -9.81f;
+
     
     #endregion
 
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         currentLane = LanePosition.Middle;
-        _animator.SetInteger("AnimationPar" , 1);
+        _animator.SetInteger(runHash, 1);
         
     }
 
